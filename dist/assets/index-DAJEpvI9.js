@@ -249,11 +249,11 @@ Example:
 Perhaps you're looking to import 'styled-components/native'?
 Read more about this at https://www.styled-components.com/docs/basics#react-native`);var Tf="__sc-".concat(ao,"__");typeof window<"u"&&(window[Tf]||(window[Tf]=0),window[Tf]===1&&console.warn(`It looks like there are several instances of 'styled-components' initialized in this application. This may cause dynamic styles to not render properly, errors during the rehydration process, a missing theme prop, and makes your application bigger without good reason.
 
-See https://s-c.sh/2BAXzed for more info.`),window[Tf]+=1);const Uf=({isError:u=!1,...f})=>ve.jsxDEV(tA,{isError:u,...f},void 0,!1,{fileName:"/Users/hanyoungpark/Desktop/woowa/react-payments/src/components/common/Input.tsx",lineNumber:9,columnNumber:10},void 0),tA=vt.input`
+See https://s-c.sh/2BAXzed for more info.`),window[Tf]+=1);const Uf=({isError:u=!1,...f})=>ve.jsxDEV(tA,{$isError:u,...f},void 0,!1,{fileName:"/Users/hanyoungpark/Desktop/woowa/react-payments/src/components/common/Input.tsx",lineNumber:9,columnNumber:10},void 0),tA=vt.input`
   width: ${u=>u.width};
   padding: 10px 7px;
 
-  border: 1.2px solid ${u=>u.isError?"#ff3d3d":"#acacac"};
+  border: 1.2px solid ${u=>u.$isError?"#ff3d3d":"#acacac"};
   border-radius: 5px;
   font-size: 15px;
 
