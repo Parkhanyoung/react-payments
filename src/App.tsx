@@ -1,79 +1,23 @@
-import './App.css';
-import useInput from './hooks/useInput';
-import useInputs from './hooks/useInputs';
-import CardholderNameContainer from './components/CardholderNameContainer';
-import CardExpiryDateContainer from './components/CardExpiryDateContainer';
-import { inquireCardNumber, inquireCardholderName, inquireExpiryMonth, inquireExpiryYear } from './inquiry';
-import CardNumberContainer from './components/CardNumbersContainer';
-import CardPreview from './components/CardPreview';
 import styled from 'styled-components';
 
+import CardholderNameInputContainer from './components/CardholderNameInputContainer';
+import CardExpiryDateInputContainer from './components/CardExpiryDateInputContainer';
+import CardNumbersInputContainer from './components/CardNumbersInputContainer';
+import CardPreview from './components/CardPreview';
+
+import useCardInfo from './hooks/useCardInfo';
+
 const App = () => {
-  const {
-    value: cardNumbers,
-    generateChangeHandler: generateCardNumbersChangeHandler,
-    generateErrorMessageUpdater: generateCardNumberErrorMessageUpdater,
-    errorMessage: cardNumbersErrorMessage,
-    errorStatus: cardNumbersErrorStatus,
-  } = useInputs(
-    {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    inquireCardNumber,
-  );
-
-  const {
-    value: cardholderName,
-    setValue: setCardholderName,
-    updateErrorMessage: updateCardholderNameErrorMessage,
-    errorMessage: cardholderNameErrorMessage,
-  } = useInput('', inquireCardholderName);
-
-  const {
-    value: expiryMonth,
-    handleChange: handleChangeExpiryMonth,
-    updateErrorMessage: updateExpiryMonthErrorMessage,
-    errorMessage: expiryMonthErrorMessage,
-  } = useInput('', inquireExpiryMonth);
-
-  const {
-    value: expiryYear,
-    handleChange: handleChangeExpiryYear,
-    updateErrorMessage: updateExpiryYearErrorMessage,
-    errorMessage: expiryYearErrorMessage,
-  } = useInput('', inquireExpiryYear);
+  const { cardNumbers, expiryDate, cardholderName } = useCardInfo();
 
   return (
     <AppLayout>
-      <CardPreview
-        cardNumbers={cardNumbers}
-        expiryDate={{ month: expiryMonth, year: expiryYear }}
-        cardholderName={cardholderName}
-      />
-      <CardInfoWrapper>
-        <CardNumberContainer
-          cardNumbers={cardNumbers}
-          generateChangeHandler={generateCardNumbersChangeHandler}
-          generateErrorMessageUpdater={generateCardNumberErrorMessageUpdater}
-          errorMessage={cardNumbersErrorMessage}
-          errorStatus={cardNumbersErrorStatus}
-        />
-        <CardExpiryDateContainer
-          expiryDate={{ month: expiryMonth, year: expiryYear }}
-          changeHandler={{ month: handleChangeExpiryMonth, year: handleChangeExpiryYear }}
-          errorMessageUpdater={{ month: updateExpiryMonthErrorMessage, year: updateExpiryYearErrorMessage }}
-          errorMessage={{ month: expiryMonthErrorMessage, year: expiryYearErrorMessage }}
-        />
-        <CardholderNameContainer
-          cardholderName={cardholderName}
-          setCardholderName={setCardholderName}
-          updateErrorMessage={updateCardholderNameErrorMessage}
-          errorMessage={cardholderNameErrorMessage}
-        />
-      </CardInfoWrapper>
+      <CardPreview cardNumbers={cardNumbers.data} expiryDate={expiryDate.data} cardholderName={cardholderName.data} />
+      <CardInfoInputWrapper>
+        <CardNumbersInputContainer {...cardNumbers} />
+        <CardExpiryDateInputContainer {...expiryDate} />
+        <CardholderNameInputContainer {...cardholderName} />
+      </CardInfoInputWrapper>
     </AppLayout>
   );
 };
@@ -85,7 +29,7 @@ const AppLayout = styled.div`
   padding-top: 60px;
 `;
 
-const CardInfoWrapper = styled.section`
+const CardInfoInputWrapper = styled.section`
   margin-top: 50px;
 `;
 
