@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import Input from '../../../common/Input';
 
-import useFocusOnInitialRender from '../../../../hooks/useFocusOnInitialRender';
 import useRefs from '../../../../hooks/useRefs';
 import getObjectKeys from '../../../../utils/getObjectKeys';
 
@@ -16,12 +15,16 @@ const CARD_NUMBER_LENGTH = 4;
 export interface ICardNumberInputsProps {
   cardNumbers: Record<string, string>;
   isError: Record<string, boolean>;
-  onBlur: () => void;
+  validateValue: (key: string, targetValue: string) => void;
   generateOnChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function CardNumberInputs({ cardNumbers, isError, onBlur, generateOnChange }: ICardNumberInputsProps) {
-  const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();
+export default function CardNumberInputs({
+  cardNumbers,
+  isError,
+  validateValue,
+  generateOnChange,
+}: ICardNumberInputsProps) {
   const cardNumberKeys = getObjectKeys(cardNumbers);
   const { getRefWithIndex, generateRefWithIndex } = useRefs<HTMLInputElement>(cardNumberKeys.length);
 
@@ -29,7 +32,6 @@ export default function CardNumberInputs({ cardNumbers, isError, onBlur, generat
     <>
       {cardNumberKeys.map((key, index) => {
         const type = PASSWORD_INPUT_KEYS.includes(key) ? INPUT_TYPE.password : INPUT_TYPE.text;
-        const refConfig = { ref: index === 0 ? initialFocusTargetRef : generateRefWithIndex(index) };
 
         const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           generateOnChange(key)(e);
@@ -40,6 +42,7 @@ export default function CardNumberInputs({ cardNumbers, isError, onBlur, generat
           }
         };
 
+        const refConfig = { ref: index === 0 ? null : generateRefWithIndex(index) };
         return (
           <Input
             onChange={onChange}
@@ -47,11 +50,12 @@ export default function CardNumberInputs({ cardNumbers, isError, onBlur, generat
             id={`${key}-card-numbers-input`}
             isError={isError[key]}
             value={cardNumbers[index]}
-            onBlur={onBlur}
+            onBlur={e => validateValue(key, e.target.value)}
             placeholder="1234"
             maxLength={4}
             type={type}
             width="23%"
+            autoFocus={index === 0}
             {...refConfig}
           />
         );

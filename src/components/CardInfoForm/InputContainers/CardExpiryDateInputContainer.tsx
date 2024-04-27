@@ -3,9 +3,7 @@ import { useRef } from 'react';
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
 
-import useExpiryDate from '../../../hooks/useExpiryDate';
 import { IInputControl } from '../../../hooks/useInput';
-import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
 import * as S from '../../../styles/common';
 
 const MONTH_LENGTH = 2;
@@ -16,18 +14,18 @@ interface CardExpiryDateInputContainerProps {
 }
 
 const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContainerProps) => {
-  const {
-    onMonthChange,
-    onYearChange,
-    onMonthBlur,
-    onYearBlur,
-    monthErrorMessage,
-    yearErrorMessage,
-    isMonthError,
-    isYearError,
-  } = useExpiryDate({ month, year });
-  const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();
-  const secondInputRef = useRef<HTMLInputElement>(null);
+  const yearInputRef = useRef<HTMLInputElement>(null);
+
+  const focusYearInput = () => yearInputRef.current?.focus();
+
+  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    month.setValue(value);
+    const isFilled = value.length === MONTH_LENGTH;
+    if (isFilled) {
+      focusYearInput();
+    }
+  };
 
   return (
     <div>
@@ -38,37 +36,31 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
         labelFor="card-expiry-month-input"
       >
         <Input
-          ref={initialFocusTargetRef}
           id="card-expiry-month-input"
-          isError={isMonthError}
+          isError={month.errorStatus.isError}
           value={month.value}
-          onChange={e => {
-            onMonthChange(e);
-            const isFilled = e.target.value.length === MONTH_LENGTH;
-            if (isFilled) {
-              secondInputRef.current?.focus();
-            }
-          }}
-          onBlur={onMonthBlur}
+          onChange={onMonthChange}
+          onBlur={month.onBlur}
           placeholder="01"
           maxLength={2}
           width="48%"
+          autoFocus={true}
         />
         <Input
-          ref={secondInputRef}
+          ref={yearInputRef}
           id="card-expiry-year-input"
-          isError={isYearError}
+          isError={year.errorStatus.isError}
           value={year.value}
-          onChange={onYearChange}
-          onBlur={onYearBlur}
+          onChange={year.onChange}
+          onBlur={year.onBlur}
           placeholder="24"
           maxLength={2}
           width="48%"
         />
       </InputContainer>
       <S.ErrorWrapper>
-        <S.ErrorText>{monthErrorMessage}</S.ErrorText>
-        <S.ErrorText>{yearErrorMessage}</S.ErrorText>
+        <S.ErrorText>{month.errorStatus.errorMessage}</S.ErrorText>
+        <S.ErrorText>{year.errorStatus.errorMessage}</S.ErrorText>
       </S.ErrorWrapper>
     </div>
   );

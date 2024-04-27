@@ -1,18 +1,9 @@
 import InputContainer from '../../common/InputContainer';
 import Input from '../../common/Input';
-
-import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 import { IInputControl } from '../../../hooks/useInput';
-import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
 import * as S from '../../../styles/common';
 
-export default function PasswordInputContainer({ value, onChange, errorStatus }: IInputControl) {
-  const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();
-  const {
-    displayingErrorStatus: { errorMessage, isError },
-    bringErrorStatus,
-  } = useDisplayingErrorStatus(errorStatus);
-
+export default function PasswordInputContainer({ value, onChange, onBlur, errorStatus }: IInputControl) {
   return (
     <div>
       <InputContainer
@@ -22,19 +13,19 @@ export default function PasswordInputContainer({ value, onChange, errorStatus }:
         labelText="비밀번호 앞 2자리"
       >
         <Input
-          ref={initialFocusTargetRef}
-          isError={isError}
+          isError={errorStatus.isError}
           value={value}
           maxLength={2}
           type="password"
           width="100%"
           onChange={onChange}
-          onBlur={bringErrorStatus}
+          onBlur={onBlur}
           placeholder="12"
+          autoFocus={true}
         />
       </InputContainer>
       <S.ErrorWrapper>
-        <S.ErrorText>{errorMessage}</S.ErrorText>
+        <S.ErrorText>{errorStatus.errorMessage}</S.ErrorText>
       </S.ErrorWrapper>
     </div>
   );
