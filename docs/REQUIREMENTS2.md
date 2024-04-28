@@ -17,3 +17,13 @@
 
 - [x] 인터페이스 선언 중복 제거
 - [x] import 선언 순서 정렬
+
+## step 2 피드백 반영
+
+- [x] 컴포넌트 id를 고유하게 만들기(uuid 추가)
+- [x] [CardNumberInputs.tsx] cardNumbers[index] -> cardNumbers[key]
+- [x] [CardInfoForm] type="submit"으로 수정하고, onSubmit을 핸들링하기
+- [x] [useCardInfoCompletionStatus.ts] 로직 중복 제거
+- [x] CardPreviewBack, Select 스토리북 추가
+- [x] onMonth blur 시 자동 formatting 추가
+- [x] cardPreview 전환 애니메이션 추가
