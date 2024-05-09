@@ -18,7 +18,7 @@ export default function CardNumbersContainer({ value, onChange, onBlur, errorSta
           isError={errorStatus.isError}
           value={value.raw}
           onBlur={onBlur}
-          placeholder="1234"
+          placeholder="16자리로 입력해 주세요 (Diners - 14자리, AMEX - 15자리)"
           maxLength={16}
           autoFocus
         />
