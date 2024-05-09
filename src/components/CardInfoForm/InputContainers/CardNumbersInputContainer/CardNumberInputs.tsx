@@ -53,7 +53,7 @@ export default function CardNumberInputs({
             isError={isError[key]}
             value={cardNumbers[key]}
             onBlur={e => validateValue(key, e.target.value)}
-            placeholder="1234"
+            placeholder="16자리로 입력해 주세요 (Diners - 14자리, AMEX - 15자리)"
             maxLength={4}
             type={type}
             width="23%"
