@@ -22,7 +22,7 @@ export default function CardTypeSelectContainer({ value, onChange }: IInputContr
   return (
     <S.Container>
       <InputContainer title="카드사를 선택해 주세요" subtitle="현재 국내 카드사만 가능합니다.">
-        <S.CardTypeSelectButton $hasValue={Boolean(value)} onClick={() => setIsCardTypeModalOpen(true)}>
+        <S.CardTypeSelectButton type="button" $hasValue={Boolean(value)} onClick={() => setIsCardTypeModalOpen(true)}>
           {currentCardType}
         </S.CardTypeSelectButton>
         <CardTypeRadioModal
@@ -44,7 +44,7 @@ const S = {
   CardTypeSelectButton: styled.button<{ $hasValue: boolean }>`
     width: 100%;
     height: 36px;
-    border: 1px solid #333333;
+    border: 1px solid #acacac;
     border-radius: 4px;
     background-color: #ffffff;
     color: ${({ $hasValue }) => ($hasValue ? '#333333' : '#b3b3b3')};

@@ -13,7 +13,7 @@ import {
 
 interface CardInfoControl {
   cardNumbers: IInputsControl;
-  cardType: IInputControl<HTMLSelectElement>;
+  cardType: IInputControl<HTMLInputElement>;
   expiryDate: {
     month: IInputControl;
     year: IInputControl;

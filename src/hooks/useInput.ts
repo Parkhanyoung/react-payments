@@ -23,7 +23,6 @@ const useInput = <T extends InputRelatedElement = HTMLInputElement>(
   const { errorStatus, validateValue } = useValidation(value, validate);
 
   const onChange = (e: React.ChangeEvent<T>) => {
-    console.log(e.target.value);
     setValue(e.target.value);
   };
 

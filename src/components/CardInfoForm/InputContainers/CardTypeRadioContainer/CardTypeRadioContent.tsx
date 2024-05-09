@@ -40,14 +40,13 @@ const S = {
 
   BankItem: styled.div`
     width: 52px;
-
-    cursor: pointer;
   `,
 
   BankItemLabel: styled.label`
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
   `,
 
   BankName: styled.div`
