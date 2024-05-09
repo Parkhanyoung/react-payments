@@ -1,41 +1,26 @@
 import styled from 'styled-components';
-
-import MasterCardLogo from '../../../../src/assets/images/mastercard.png';
-import VisaCardLogo from '../../../../src/assets/images/visa.png';
+import { CARD_BRAND, CARD_BRAND_ICON, CardBrand, CardBrandIcon } from '../../../assets/images/card-brand-icons';
 
 interface ICardBrandLogoProps {
-  firstTwoDigits: string;
+  cardBrand: CardBrand;
 }
 
-type LogoImageSrc = string;
-
-const VISA_FIRST_DIGIT = '4';
-const MIN_MASTER_FIRST_TWO_DIGITS = 51;
-const MAX_MASTER_FIRST_TWO_DIGITS = 55;
-
-const getCardBrandLogo = (firstTwoDigits: string): LogoImageSrc | null => {
-  if (firstTwoDigits[0] === VISA_FIRST_DIGIT) {
-    return VisaCardLogo;
-  } else if (
-    Number(firstTwoDigits) >= MIN_MASTER_FIRST_TWO_DIGITS &&
-    Number(firstTwoDigits) <= MAX_MASTER_FIRST_TWO_DIGITS
-  ) {
-    return MasterCardLogo;
-  }
-
-  return null;
-};
-
-const CardBrandLogo = ({ firstTwoDigits }: ICardBrandLogoProps) => {
-  const matchedLogo = getCardBrandLogo(firstTwoDigits);
-
-  if (!matchedLogo) {
+const getCardBrandLogo = (cardBrand: CardBrand): CardBrandIcon | null => {
+  if (cardBrand === CARD_BRAND.unknown) {
     return null;
   }
 
+  return CARD_BRAND_ICON[cardBrand];
+};
+
+const CardBrandLogo = ({ cardBrand }: ICardBrandLogoProps) => {
+  const BrandLogo = getCardBrandLogo(cardBrand);
+
+  if (!BrandLogo) return null;
+
   return (
     <S.BrandLogoContainer>
-      <S.StyledImage src={matchedLogo} />
+      <BrandLogo />
     </S.BrandLogoContainer>
   );
 };

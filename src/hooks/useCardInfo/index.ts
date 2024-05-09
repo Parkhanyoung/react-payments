@@ -1,4 +1,4 @@
-import useCardInfoInputs, { ICardInfoInputsControl } from './useCardInfoInputs';
+import useCardInfoInputs, { ICardInfoInputsControl } from './useCardInfoInput';
 import useCardInfoCompletionStatus, { ICardInfoCompletionStatus } from './useCardInfoCompletionStatus';
 
 interface IUseCardInfoReturn {

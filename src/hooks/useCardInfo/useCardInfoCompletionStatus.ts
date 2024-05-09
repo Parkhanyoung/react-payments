@@ -1,4 +1,3 @@
-import getObjectValues from '../../utils/getObjectValues';
 import {
   validateCardNumber,
   validateCardType,
@@ -8,7 +7,7 @@ import {
   validateExpiryYear,
   validatePassword,
 } from '../../validators';
-import { ICardInfoInputsControl } from './useCardInfoInputs';
+import { ICardInfoInputsControl } from './useCardInfoInput';
 
 interface DynamicObject<T> {
   [key: string]: T;
@@ -34,10 +33,13 @@ const useCardInfoCompletionStatus = ({
   const evaluateCompletion = (value: string, validate: (value: string) => { isError: boolean }) =>
     !validate(value).isError;
 
+  console.log(
+    evaluateCompletion(cardNumbers.value.raw, (value: string) => validateCardNumber(value, cardNumbers.cardBrand)),
+  );
   return {
-    isCardNumbersCompleted: getObjectValues<string>(cardNumbers.value)
-      .map(val => evaluateCompletion(val, validateCardNumber))
-      .every(v => v),
+    isCardNumbersCompleted: evaluateCompletion(cardNumbers.value.raw, (value: string) =>
+      validateCardNumber(value, cardNumbers.cardBrand),
+    ),
     isCardTypeCompleted: evaluateCompletion(cardType.value, validateCardType),
     isExpiryDateCompleted:
       evaluateCompletion(expiryMonth.value, validateExpiryMonth) &&

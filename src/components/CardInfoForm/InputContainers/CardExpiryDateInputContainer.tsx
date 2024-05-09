@@ -5,7 +5,7 @@ import InputContainer from '../../common/InputContainer';
 
 import * as S from '../../../styles/common';
 import makeUniqueString from '../../../utils/getUniqueId';
-import { UseExpiryDateReturn } from '../../../hooks/useCardInfo/useCardInfoInputs';
+import { UseExpiryDateReturn } from '../../../hooks/useCardInfo/useCardInfoInput';
 
 const MONTH_LENGTH = 2;
 

@@ -9,7 +9,7 @@ import PasswordInputContainer from './InputContainers/PasswordInputContainer';
 import CardTypeRadioContainer from './InputContainers/CardTypeRadioContainer';
 
 import useSequence from '../../hooks/useSequence';
-import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
+import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInput';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
 import getObjectValues from '../../utils/getObjectValues';
 import ROUTE_PATH from '../../pages/constants/routePath';
@@ -50,7 +50,7 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
     const isAgreed = Object.values(agreement).every(v => v);
     if (isAgreed && isSubmitable) {
       navigate(ROUTE_PATH.cardRegisterComplete, {
-        state: { cardNumberPrefix: cardNumbers.value.first, cardType: cardType.value },
+        state: { cardNumberPrefix: cardNumbers.value, cardType: cardType.value },
       });
     }
   };

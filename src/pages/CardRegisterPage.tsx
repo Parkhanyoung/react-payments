@@ -17,7 +17,8 @@ const CardRegisterPage = () => {
       <CardPreview
         isFront={isCardFront}
         cardType={cardType.value}
-        cardNumbers={cardNumbers.value}
+        cardNumbers={cardNumbers.value.formatted}
+        cardBrand={cardNumbers.cardBrand}
         expiryDate={{ month: expiryDate.month.value, year: expiryDate.year.value }}
         cardholderName={cardholderName.value}
         cvc={cvc.value}

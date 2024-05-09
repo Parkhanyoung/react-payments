@@ -1,6 +1,12 @@
-import useInputs, { IInputsControl } from '../useInputs';
-import { validateCardNumber } from '../../validators';
-import { useCVC, useCardIssuer, useCardholderName, useExpiryDate, usePasswordPrefix } from 'ryan-card-info-hooks';
+import {
+  useCVC,
+  useCardIssuer,
+  useCardNumber,
+  useCardholderName,
+  useExpiryDate,
+  usePasswordPrefix,
+} from 'ryan-card-info-hooks';
+import { CardBrand } from '../../assets/images/card-brand-icons';
 
 export type ErrorStatus =
   | {
@@ -54,8 +60,19 @@ export interface UseExpiryDateReturn {
   };
 }
 
+export interface UseCardNumberReturn {
+  value: {
+    raw: string;
+    formatted: string[];
+  };
+  errorStatus: ErrorStatus;
+  cardBrand: CardBrand;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+}
+
 export interface ICardInfoInputsControl {
-  cardNumbers: IInputsControl;
+  cardNumbers: UseCardNumberReturn;
   cardType: UseCardIssuerReturn;
   expiryDate: UseExpiryDateReturn;
   cardholderName: UseCardholderNameReturn;
@@ -63,24 +80,17 @@ export interface ICardInfoInputsControl {
   password: UsePasswordPrefixReturn;
 }
 
-const initialCardNumbers = {
-  first: '',
-  second: '',
-  third: '',
-  fourth: '',
-};
-
-const useCardInfoInputs = (): ICardInfoInputsControl => {
-  const cardNumbersControl = useInputs(validateCardNumber, initialCardNumbers);
-  const cardTypeControl = useCardIssuer();
+const useCardInfoInput = (): ICardInfoInputsControl => {
+  const cardNumberControl = useCardNumber();
+  const cardIssuerControl = useCardIssuer();
   const expiryDateControl = useExpiryDate();
   const cardholderNameControl = useCardholderName();
   const cvcControl = useCVC();
   const passwordControl = usePasswordPrefix();
 
   return {
-    cardNumbers: cardNumbersControl,
-    cardType: cardTypeControl,
+    cardNumbers: cardNumberControl,
+    cardType: cardIssuerControl,
     expiryDate: expiryDateControl,
     cardholderName: cardholderNameControl,
     cvc: cvcControl,
@@ -88,4 +98,4 @@ const useCardInfoInputs = (): ICardInfoInputsControl => {
   };
 };
 
-export default useCardInfoInputs;
+export default useCardInfoInput;

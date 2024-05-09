@@ -1,16 +1,16 @@
+import { CARD_BRAND, CardBrand } from '../assets/images/card-brand-icons';
 import { IErrorStatus } from './index.d';
 
-const CARD_NUMBER_LENGTH = 4;
+const validateCardNumber = (cardNumber: string, cardBrand: CardBrand): IErrorStatus => {
+  const isDiners = cardBrand === CARD_BRAND.Diners && /^\d{14}$/.test(cardNumber);
+  const isAMEX = cardBrand === CARD_BRAND.AMEX && /^\d{15}$/.test(cardNumber);
+  const is16Digits = /^\d{16}$/.test(cardNumber);
 
-const validateCardNumber = (cardNumber: string): IErrorStatus => {
-  const isValidLength = cardNumber.length === CARD_NUMBER_LENGTH;
-  if (!isValidLength) {
-    return { isError: true, errorMessage: '4자리로 입력해 주세요' };
-  }
-
-  const isValidCardNumber = /^\d{4}$/.test(cardNumber);
-  if (!isValidCardNumber) {
-    return { isError: true, errorMessage: '카드번호 0000 ~ 9999 사이의 숫자로 입력해 주세요' };
+  if (!is16Digits && !isDiners && !isAMEX) {
+    return {
+      isError: true,
+      errorMessage: '카드번호는 16자리로 입력해 주세요. (Diners - 14자리, AMEX - 15자리 제외)',
+    };
   }
 
   return { isError: false, errorMessage: '' };
