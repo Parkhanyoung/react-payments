@@ -50,7 +50,7 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
     const isAgreed = Object.values(agreement).every(v => v);
     if (isAgreed && isSubmitable) {
       navigate(ROUTE_PATH.cardRegisterComplete, {
-        state: { cardNumberPrefix: cardNumbers.value, cardType: cardType.value },
+        state: { cardNumberPrefix: cardNumbers.value.formatted[0], cardType: cardType.value },
       });
     }
   };

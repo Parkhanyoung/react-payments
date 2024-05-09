@@ -24,10 +24,12 @@ export default function CardRegisterCompletePage() {
 
   return (
     <S.PageContainer>
-      <S.CompletionIcon src={CompletionIconSrc} alt="카드 등록 완료 이미지" />
-      <S.CompletionText>{cardNumberPrefix}로 시작하는</S.CompletionText>
-      <S.CompletionText>{cardType}가 등록되었어요.</S.CompletionText>
-      <S.ConfirmButton onClick={onClickConfirmButton}>확인</S.ConfirmButton>
+      <S.PageWrapper>
+        <S.CompletionIcon src={CompletionIconSrc} alt="카드 등록 완료 이미지" />
+        <S.CompletionText>{cardNumberPrefix}로 시작하는</S.CompletionText>
+        <S.CompletionText>{cardType}가 등록되었어요.</S.CompletionText>
+        <S.ConfirmButton onClick={onClickConfirmButton}>확인</S.ConfirmButton>
+      </S.PageWrapper>
     </S.PageContainer>
   );
 }
@@ -35,10 +37,18 @@ export default function CardRegisterCompletePage() {
 const S = {
   PageContainer: styled.div`
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  `,
+
+  PageWrapper: styled.div`
+    width: 80%;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 45%;
+    margin: auto;
   `,
 
   CompletionIcon: styled.img`
