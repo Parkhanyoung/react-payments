@@ -2,15 +2,15 @@ import styled from 'styled-components';
 
 import InputContainer from '../../../common/InputContainer';
 
-import { IInputControl } from '../../../../hooks/useInput';
 import getObjectKeys from '../../../../utils/getObjectKeys';
 import { CARD_TYPE } from '../../../../constants/cardType';
 import CardTypeRadioModal from './CardTypeRadioModal';
 import { useState } from 'react';
+import { UseCardIssuerReturn } from '../../../../hooks/useCardInfo/useCardInfoInputs';
 
 const cardTypeOptions = getObjectKeys(CARD_TYPE);
 
-export default function CardTypeSelectContainer({ value, onChange }: IInputControl<HTMLInputElement>) {
+export default function CardTypeSelectContainer({ value, onChange }: UseCardIssuerReturn) {
   const [isCardTypeModalOpen, setIsCardTypeModalOpen] = useState(false);
 
   const onCardTypeModalClose = () => {

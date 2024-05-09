@@ -15,7 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0",
-    "ryan-card-info-hooks": "^0.0.8",
+    "ryan-card-info-hooks": "^0.0.9",
     "ryan-modal": "^0.0.10",
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2"
