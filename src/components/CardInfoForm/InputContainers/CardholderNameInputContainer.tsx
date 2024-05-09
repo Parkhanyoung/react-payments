@@ -1,12 +1,11 @@
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
 
-import { IInputControl } from '../../../hooks/useInput';
 import * as S from '../../../styles/common';
 import makeUniqueString from '../../../utils/getUniqueId';
+import { UseCardholderNameReturn } from '../../../hooks/useCardInfo/useCardInfoInputs';
 
-const CardholderNameInputContainer = ({ value, setValue, onBlur, errorStatus }: IInputControl) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
+const CardholderNameInputContainer = ({ value, onChange, onBlur, errorStatus }: UseCardholderNameReturn) => {
   const inputId = makeUniqueString(`cardholder-name-input`);
 
   return (

@@ -1,20 +1,38 @@
-import useInput, { IInputControl } from '../useInput';
+import { IInputControl } from './../useInput';
+import useInput from '../useInput';
 import useInputs, { IInputsControl } from '../useInputs';
 import {
   validateCardNumber,
-  validateCardholderName,
   validateCvc,
   validateExpiryMonth,
   validateExpiryYear,
   validatePassword,
   validateCardType,
 } from '../../validators';
+import { useCardholderName } from 'ryan-card-info-hooks';
+
+export type ErrorStatus =
+  | {
+      isError: false;
+      errorMessage: null;
+    }
+  | {
+      isError: true;
+      errorMessage: string;
+    };
+
+export interface UseCardholderNameReturn {
+  value: string;
+  errorStatus: ErrorStatus;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+}
 
 export interface ICardInfoInputsControl {
   cardNumbers: IInputsControl;
   cardType: IInputControl<HTMLInputElement>;
   expiryDate: { month: IInputControl; year: IInputControl };
-  cardholderName: IInputControl;
+  cardholderName: UseCardholderNameReturn;
   cvc: IInputControl;
   password: IInputControl;
 }
@@ -31,7 +49,7 @@ const useCardInfoInputs = (): ICardInfoInputsControl => {
   const cardTypeControl = useInput(validateCardType);
   const expiryMonthControl = useInput(validateExpiryMonth);
   const expiryYearControl = useInput(validateExpiryYear);
-  const cardholderNameControl = useInput(validateCardholderName);
+  const cardholderNameControl = useCardholderName();
   const cvcControl = useInput(validateCvc);
   const passwordControl = useInput(validatePassword);
 
