@@ -11,18 +11,13 @@ export interface ICardTypeRadioModalProps {
 }
 
 export default function CardTypeRadioModal({ isOpen, cardTypeOptions, onClose, onChange }: ICardTypeRadioModalProps) {
-  const onChangeWithClose = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
-    onClose();
-  };
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Dimmer />
       <Modal.Content size="small" style={{ padding: '24px 26px' }}>
         <S.Title>카드사 선택</S.Title>
         <Modal.CloseButton />
-        <CardTypeRadioContent cardTypeOptions={cardTypeOptions} onChange={onChangeWithClose} />
+        <CardTypeRadioContent cardTypeOptions={cardTypeOptions} onChange={onChange} onClose={onClose} />
       </Modal.Content>
     </Modal>
   );

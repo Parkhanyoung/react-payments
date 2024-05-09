@@ -5,9 +5,10 @@ import { CardType } from '../../../../constants/cardType';
 export interface ICardTypeRadioContentProps {
   cardTypeOptions: CardType[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClose: () => void;
 }
 
-export default function CardTypeRadioContent({ cardTypeOptions, onChange }: ICardTypeRadioContentProps) {
+export default function CardTypeRadioContent({ cardTypeOptions, onChange, onClose }: ICardTypeRadioContentProps) {
   const CardTypeOptions = cardTypeOptions.map(cardType => {
     const CardTypeOption = BANK_ICON[cardType];
 
@@ -17,7 +18,15 @@ export default function CardTypeRadioContent({ cardTypeOptions, onChange }: ICar
           <CardTypeOption width="32px" />
           <S.BankName>{cardType}</S.BankName>
         </S.BankItemLabel>
-        <input name="card-type" id={cardType} type="radio" onChange={onChange} hidden value={cardType} />
+        <input
+          name="card-type"
+          id={cardType}
+          type="radio"
+          onChange={onChange}
+          onClick={onClose}
+          hidden
+          value={cardType}
+        />
       </S.BankItem>
     );
   });
