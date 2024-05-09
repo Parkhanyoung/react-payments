@@ -12,7 +12,7 @@ import {
 
 export interface ICardInfoInputsControl {
   cardNumbers: IInputsControl;
-  cardType: IInputControl<HTMLSelectElement>;
+  cardType: IInputControl<HTMLInputElement>;
   expiryDate: { month: IInputControl; year: IInputControl };
   cardholderName: IInputControl;
   cvc: IInputControl;
@@ -28,7 +28,7 @@ const initialCardNumbers = {
 
 const useCardInfoInputs = (): ICardInfoInputsControl => {
   const cardNumbersControl = useInputs(validateCardNumber, initialCardNumbers);
-  const cardTypeControl = useInput<HTMLSelectElement>(validateCardType);
+  const cardTypeControl = useInput(validateCardType);
   const expiryMonthControl = useInput(validateExpiryMonth);
   const expiryYearControl = useInput(validateExpiryYear);
   const cardholderNameControl = useInput(validateCardholderName);

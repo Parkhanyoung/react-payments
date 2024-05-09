@@ -6,7 +6,7 @@ import CardExpiryDateInputContainer from './InputContainers/CardExpiryDateInputC
 import CardholderNameInputContainer from './InputContainers/CardholderNameInputContainer';
 import CvcInputContainer from './InputContainers/CvcInputContainer';
 import PasswordInputContainer from './InputContainers/PasswordInputContainer';
-import CardTypeSelectContainer from './InputContainers/CardTypeSelectContainer';
+import CardTypeSelectContainer from './InputContainers/CardTypeRadioContainer';
 
 import useSequence from '../../hooks/useSequence';
 import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';

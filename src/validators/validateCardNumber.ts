@@ -10,7 +10,7 @@ const validateCardNumber = (cardNumber: string): IErrorStatus => {
 
   const isValidCardNumber = /^\d{4}$/.test(cardNumber);
   if (!isValidCardNumber) {
-    return { isError: true, errorMessage: '0000 ~ 9999 사이의 숫자로 입력해 주세요' };
+    return { isError: true, errorMessage: '카드번호 0000 ~ 9999 사이의 숫자로 입력해 주세요' };
   }
 
   return { isError: false, errorMessage: '' };
