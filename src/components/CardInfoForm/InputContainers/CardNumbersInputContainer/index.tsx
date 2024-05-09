@@ -1,7 +1,7 @@
 import InputContainer from '../../../common/InputContainer';
 
 import { ErrorWrapper, ErrorText } from '../../../../styles/common';
-import { UseCardNumberReturn } from '../../../../hooks/useCardInfo/useCardInfoInput';
+import { UseCardNumberReturn } from '../../../../hooks/useCardInfo/useCardInfoInputs';
 import Input from '../../../common/Input';
 
 export default function CardNumbersContainer({ value, onChange, onBlur, errorStatus }: UseCardNumberReturn) {

@@ -9,7 +9,7 @@ import PasswordInputContainer from './InputContainers/PasswordInputContainer';
 import CardTypeRadioContainer from './InputContainers/CardTypeRadioContainer';
 
 import useSequence from '../../hooks/useSequence';
-import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInput';
+import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
 import getObjectValues from '../../utils/getObjectValues';
 import ROUTE_PATH from '../../pages/constants/routePath';

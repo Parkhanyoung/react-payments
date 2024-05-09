@@ -2,7 +2,7 @@ import InputContainer from '../../common/InputContainer';
 import Input from '../../common/Input';
 import * as S from '../../../styles/common';
 import makeUniqueString from '../../../utils/getUniqueId';
-import { UsePasswordPrefixReturn } from '../../../hooks/useCardInfo/useCardInfoInput';
+import { UsePasswordPrefixReturn } from '../../../hooks/useCardInfo/useCardInfoInputs';
 
 export default function PasswordInputContainer({ value, onChange, onBlur, errorStatus }: UsePasswordPrefixReturn) {
   const inputId = makeUniqueString(`password-input`);
