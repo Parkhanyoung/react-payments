@@ -3,42 +3,24 @@ import { useRef } from 'react';
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
 
-import { IInputControl } from '../../../hooks/useInput';
 import * as S from '../../../styles/common';
 import makeUniqueString from '../../../utils/getUniqueId';
+import { UseExpiryDateReturn } from '../../../hooks/useCardInfo/useCardInfoInputs';
 
 const MONTH_LENGTH = 2;
 
-const formatMonth = (month: string) => {
-  if (month.length === 1 && month !== '0') {
-    return `0${month}`;
-  }
-  return month;
-};
-
-interface CardExpiryDateInputContainerProps {
-  month: IInputControl;
-  year: IInputControl;
-}
-
-const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContainerProps) => {
+const CardExpiryDateInputContainer = ({ month, year }: UseExpiryDateReturn) => {
   const yearInputRef = useRef<HTMLInputElement>(null);
 
   const focusYearInput = () => yearInputRef.current?.focus();
 
   const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    month.setValue(value);
-    const isFilled = value.length === MONTH_LENGTH;
+    month.onChange(e);
+
+    const isFilled = e.target.value.length === MONTH_LENGTH;
     if (isFilled) {
       focusYearInput();
     }
-  };
-
-  const onMonthBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const formattedMonth = formatMonth(e.target.value);
-    month.setValue(formattedMonth);
-    month.validateValue(formattedMonth);
   };
 
   const monthInputId = makeUniqueString('card-expiry-month-input');
@@ -57,7 +39,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           isError={month.errorStatus.isError}
           value={month.value}
           onChange={onMonthChange}
-          onBlur={onMonthBlur}
+          onBlur={month.onBlur}
           placeholder="01"
           maxLength={2}
           width="48%"

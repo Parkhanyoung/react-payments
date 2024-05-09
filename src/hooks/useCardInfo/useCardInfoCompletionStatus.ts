@@ -1,5 +1,3 @@
-import { IInputControl } from '../useInput';
-import { IInputsControl } from '../useInputs';
 import getObjectValues from '../../utils/getObjectValues';
 import {
   validateCardNumber,
@@ -10,18 +8,7 @@ import {
   validateExpiryYear,
   validatePassword,
 } from '../../validators';
-
-interface CardInfoControl {
-  cardNumbers: IInputsControl;
-  cardType: IInputControl<HTMLInputElement>;
-  expiryDate: {
-    month: IInputControl;
-    year: IInputControl;
-  };
-  cardholderName: IInputControl;
-  cvc: IInputControl;
-  password: IInputControl;
-}
+import { ICardInfoInputsControl } from './useCardInfoInputs';
 
 interface DynamicObject<T> {
   [key: string]: T;
@@ -43,7 +30,7 @@ const useCardInfoCompletionStatus = ({
   cardholderName,
   cvc,
   password,
-}: CardInfoControl): ICardInfoCompletionStatus => {
+}: ICardInfoInputsControl): ICardInfoCompletionStatus => {
   const evaluateCompletion = (value: string, validate: (value: string) => { isError: boolean }) =>
     !validate(value).isError;
 

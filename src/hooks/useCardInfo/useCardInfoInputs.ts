@@ -1,8 +1,6 @@
-import { IInputControl } from './../useInput';
-import useInput from '../useInput';
 import useInputs, { IInputsControl } from '../useInputs';
-import { validateCardNumber, validateExpiryMonth, validateExpiryYear } from '../../validators';
-import { useCVC, useCardIssuer, useCardholderName, usePasswordPrefix } from 'ryan-card-info-hooks';
+import { validateCardNumber } from '../../validators';
+import { useCVC, useCardIssuer, useCardholderName, useExpiryDate, usePasswordPrefix } from 'ryan-card-info-hooks';
 
 export type ErrorStatus =
   | {
@@ -41,10 +39,25 @@ export interface UseCardIssuerReturn {
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
 
+export interface UseExpiryDateReturn {
+  month: {
+    value: string;
+    errorStatus: ErrorStatus;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  };
+  year: {
+    value: string;
+    errorStatus: ErrorStatus;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  };
+}
+
 export interface ICardInfoInputsControl {
   cardNumbers: IInputsControl;
   cardType: UseCardIssuerReturn;
-  expiryDate: { month: IInputControl; year: IInputControl };
+  expiryDate: UseExpiryDateReturn;
   cardholderName: UseCardholderNameReturn;
   cvc: UseCVCReturn;
   password: UsePasswordPrefixReturn;
@@ -60,8 +73,7 @@ const initialCardNumbers = {
 const useCardInfoInputs = (): ICardInfoInputsControl => {
   const cardNumbersControl = useInputs(validateCardNumber, initialCardNumbers);
   const cardTypeControl = useCardIssuer();
-  const expiryMonthControl = useInput(validateExpiryMonth);
-  const expiryYearControl = useInput(validateExpiryYear);
+  const expiryDateControl = useExpiryDate();
   const cardholderNameControl = useCardholderName();
   const cvcControl = useCVC();
   const passwordControl = usePasswordPrefix();
@@ -69,7 +81,7 @@ const useCardInfoInputs = (): ICardInfoInputsControl => {
   return {
     cardNumbers: cardNumbersControl,
     cardType: cardTypeControl,
-    expiryDate: { month: expiryMonthControl, year: expiryYearControl },
+    expiryDate: expiryDateControl,
     cardholderName: cardholderNameControl,
     cvc: cvcControl,
     password: passwordControl,
