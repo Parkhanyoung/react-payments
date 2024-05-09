@@ -9,7 +9,7 @@ import {
   validatePassword,
   validateCardType,
 } from '../../validators';
-import { useCVC, useCardholderName } from 'ryan-card-info-hooks';
+import { useCVC, useCardholderName, usePasswordPrefix } from 'ryan-card-info-hooks';
 
 export type ErrorStatus =
   | {
@@ -35,13 +35,20 @@ export interface UseCVCReturn {
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
+export interface UsePasswordPrefixReturn {
+  value: string;
+  errorStatus: ErrorStatus;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+}
+
 export interface ICardInfoInputsControl {
   cardNumbers: IInputsControl;
   cardType: IInputControl<HTMLInputElement>;
   expiryDate: { month: IInputControl; year: IInputControl };
   cardholderName: UseCardholderNameReturn;
   cvc: UseCVCReturn;
-  password: IInputControl;
+  password: UsePasswordPrefixReturn;
 }
 
 const initialCardNumbers = {
@@ -58,7 +65,7 @@ const useCardInfoInputs = (): ICardInfoInputsControl => {
   const expiryYearControl = useInput(validateExpiryYear);
   const cardholderNameControl = useCardholderName();
   const cvcControl = useCVC();
-  const passwordControl = useInput(validatePassword);
+  const passwordControl = usePasswordPrefix();
 
   return {
     cardNumbers: cardNumbersControl,
