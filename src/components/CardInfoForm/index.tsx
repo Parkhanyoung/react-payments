@@ -6,13 +6,15 @@ import CardExpiryDateInputContainer from './InputContainers/CardExpiryDateInputC
 import CardholderNameInputContainer from './InputContainers/CardholderNameInputContainer';
 import CvcInputContainer from './InputContainers/CvcInputContainer';
 import PasswordInputContainer from './InputContainers/PasswordInputContainer';
-import CardTypeSelectContainer from './InputContainers/CardTypeSelectContainer';
+import CardTypeRadioContainer from './InputContainers/CardTypeRadioContainer';
 
 import useSequence from '../../hooks/useSequence';
 import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
 import getObjectValues from '../../utils/getObjectValues';
 import ROUTE_PATH from '../../pages/constants/routePath';
+import AgreementBottomSheet from './AgreementBottomSheet';
+import { useState } from 'react';
 
 export interface ICardInfoFormProps {
   cardInfoControl: ICardInfoInputsControl;
@@ -20,8 +22,18 @@ export interface ICardInfoFormProps {
   setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface Agreement {
+  isPersonalInfoAgreed: boolean;
+  isThirdPartySharingAgreed: boolean;
+}
+
 export default function CardInfoForm({ cardInfoControl, completionStatus, setIsCardFront }: ICardInfoFormProps) {
   const navigate = useNavigate();
+  const [isAgreementBottomSheetOpen, setIsAgreementBottomSheetOpen] = useState(false);
+  const [agreement, setAgreement] = useState<Agreement>({
+    isPersonalInfoAgreed: false,
+    isThirdPartySharingAgreed: false,
+  });
 
   const { cardNumbers, cardType, expiryDate, cardholderName, cvc, password } = cardInfoControl;
 
@@ -31,11 +43,20 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isSubmitable) {
+    setIsAgreementBottomSheetOpen(true);
+  };
+
+  const onAgree = () => {
+    const isAgreed = Object.values(agreement).every(v => v);
+    if (isAgreed && isSubmitable) {
       navigate(ROUTE_PATH.cardRegisterComplete, {
-        state: { cardNumberPrefix: cardNumbers.value.first, cardType: cardType.value },
+        state: { cardNumberPrefix: cardNumbers.value, cardType: cardType.value },
       });
     }
+  };
+
+  const onAgreementBottomSheetClose = () => {
+    setIsAgreementBottomSheetOpen(false);
   };
 
   return (
@@ -44,9 +65,16 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
       {sequence >= 4 && <CvcInputContainer {...cvc} setIsCardFront={setIsCardFront} />}
       {sequence >= 3 && <CardholderNameInputContainer {...cardholderName} />}
       {sequence >= 2 && <CardExpiryDateInputContainer {...expiryDate} />}
-      {sequence >= 1 && <CardTypeSelectContainer {...cardType} />}
+      {sequence >= 1 && <CardTypeRadioContainer {...cardType} />}
       <CardNumbersInputContainer {...cardNumbers} />
       {isSubmitable && <S.SubmitButton type="submit">확인</S.SubmitButton>}
+      <AgreementBottomSheet
+        isOpen={isAgreementBottomSheetOpen}
+        onClose={onAgreementBottomSheetClose}
+        agreement={agreement}
+        setAgreement={setAgreement}
+        onAgree={onAgree}
+      />
     </form>
   );
 }

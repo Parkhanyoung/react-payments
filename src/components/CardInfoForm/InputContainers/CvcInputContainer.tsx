@@ -1,9 +1,9 @@
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
-import { IInputControl } from '../../../hooks/useInput';
 
 import * as S from '../../../styles/common';
 import makeUniqueString from '../../../utils/getUniqueId';
+import { UseCVCReturn } from '../../../hooks/useCardInfo/useCardInfoInputs';
 
 export interface ICvcInputContainerProps {
   setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,13 +12,13 @@ export interface ICvcInputContainerProps {
 const CvcInputContainer = ({
   value,
   onChange,
-  validateValue,
+  onBlur,
   errorStatus,
   setIsCardFront,
-}: IInputControl & ICvcInputContainerProps) => {
+}: UseCVCReturn & ICvcInputContainerProps) => {
   const onFocus = () => setIsCardFront(false);
-  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    validateValue(e.target.value);
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    onBlur(e);
     setIsCardFront(true);
   };
 
@@ -35,7 +35,7 @@ const CvcInputContainer = ({
           value={value}
           onChange={onChange}
           onFocus={onFocus}
-          onBlur={onBlur}
+          onBlur={handleBlur}
           width="100%"
         />
       </InputContainer>

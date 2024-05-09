@@ -13,7 +13,7 @@ export const ErrorText = styled.p`
 `;
 
 export const GlobalLayout = styled.div`
-  width: ${SCREEN_WIDTH}px;
+  min-width: ${SCREEN_WIDTH}px;
   height: 100vh;
   margin: 0 auto;
 `;

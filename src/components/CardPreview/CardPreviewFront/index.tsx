@@ -3,31 +3,30 @@ import CardNumber from './CardNumberContainer';
 import ExpiryDate from './ExpiryDate';
 
 import * as S from '../cardPreview.styles';
+import { CardBrand } from '../../../assets/images/card-brand-icons';
 
-type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 interface CardPreviewFrontProps {
   cardType: string;
-  cardNumbers: Record<CardNumberKey, string>;
+  cardNumbers: string[];
+  cardBrand: CardBrand;
   expiryDate: { month: string; year: string };
   cardholderName: string;
 }
 
-const CardPreviewFront = ({ cardType, cardNumbers, expiryDate, cardholderName }: CardPreviewFrontProps) => {
-  const firstTwoDigits = cardNumbers.first.slice(0, 2);
-
+const CardPreviewFront = ({ cardType, cardNumbers, cardBrand, expiryDate, cardholderName }: CardPreviewFrontProps) => {
   return (
     <S.CardPreviewContainer $cardType={cardType}>
       <S.CardPreviewFrontWrapper>
         <S.HeaderWrapper>
           <S.CardMagnetic />
-          <CardBrandLogo firstTwoDigits={firstTwoDigits} />
+          <CardBrandLogo cardBrand={cardBrand} />
         </S.HeaderWrapper>
         <S.BodyWrapper>
           <S.CardNumbersWrapper>
-            <CardNumber data={cardNumbers.first} />
-            <CardNumber data={cardNumbers.second} />
-            <CardNumber data={cardNumbers.third} type="secret" />
-            <CardNumber data={cardNumbers.fourth} type="secret" />
+            <CardNumber data={cardNumbers[0]} />
+            <CardNumber data={cardNumbers[1]} />
+            <CardNumber data={cardNumbers[2]} type="secret" />
+            <CardNumber data={cardNumbers[3]} type="secret" />
           </S.CardNumbersWrapper>
           <ExpiryDate expiryDate={expiryDate} />
           <S.CardholderNameWrapper>
