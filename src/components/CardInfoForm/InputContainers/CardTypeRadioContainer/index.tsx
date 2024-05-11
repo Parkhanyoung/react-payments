@@ -10,7 +10,7 @@ import { UseCardIssuerReturn } from '../../../../hooks/useCardInfo/useCardInfoIn
 
 const cardTypeOptions = getObjectKeys(CARD_TYPE);
 
-export default function CardTypeSelectContainer({ value, onChange }: UseCardIssuerReturn) {
+export default function CardTypeRadioContainer({ value, onChange }: UseCardIssuerReturn) {
   const [isCardTypeModalOpen, setIsCardTypeModalOpen] = useState(false);
 
   const onCardTypeModalClose = () => {
