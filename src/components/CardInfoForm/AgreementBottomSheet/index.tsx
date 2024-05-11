@@ -38,7 +38,6 @@ export default function AgreementBottomSheet({
 
   const isMobile = windowWidth && windowWidth < 520;
   const modalPosition = isMobile ? 'bottom' : 'center';
-  const confirmButtonTheme = isAgreed ? 'dark' : 'inactive';
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -53,10 +52,10 @@ export default function AgreementBottomSheet({
           <CheckIcon role="button" isActive={agreement.isThirdPartySharingAgreed} />
           <S.AgreementItemText>[필수] 고객정보 제 3자 제공동의</S.AgreementItemText>
         </S.AgreementItem>
-        <Modal.Button button="button" onClick={onAgree} theme={confirmButtonTheme}>
+        <Modal.Button fullWidth disabled={!isAgreed} button="button" onClick={onAgree} theme="dark">
           동의하고 저장하기
         </Modal.Button>
-        <Modal.Button type="button" style={{ marginTop: '12px' }} onClick={onClose} theme="light">
+        <Modal.Button fullWidth type="button" style={{ marginTop: '12px' }} onClick={onClose} theme="light">
           닫기
         </Modal.Button>
       </Modal.Content>

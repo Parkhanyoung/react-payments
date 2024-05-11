@@ -48,7 +48,7 @@ const S = {
   `,
 
   BankItem: styled.div`
-    width: 52px;
+    width: 54px;
   `,
 
   BankItemLabel: styled.label`
