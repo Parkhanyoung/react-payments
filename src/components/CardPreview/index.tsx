@@ -1,4 +1,4 @@
-import { CardBrand } from '../../assets/images/card-brand-icons';
+import { CardBrand } from 'ryan-card-info-hooks';
 import CardPreviewBack from './CardPreviewBack';
 import CardPreviewFront from './CardPreviewFront';
 import * as S from './cardPreview.styles';

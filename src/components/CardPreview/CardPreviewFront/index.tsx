@@ -3,7 +3,7 @@ import CardNumber from './CardNumberContainer';
 import ExpiryDate from './ExpiryDate';
 
 import * as S from '../cardPreview.styles';
-import { CardBrand } from '../../../assets/images/card-brand-icons';
+import { CardBrand } from 'ryan-card-info-hooks';
 
 interface CardPreviewFrontProps {
   cardType: string;
