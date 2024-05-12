@@ -6,7 +6,7 @@ import getObjectKeys from '../../../../utils/getObjectKeys';
 import { CARD_TYPE } from '../../../../constants/cardType';
 import CardTypeRadioModal from './CardTypeRadioModal';
 import { useState } from 'react';
-import { UseCardIssuerReturn } from '../../../../hooks/useCardInfo/useCardInfoInputs';
+import { UseCardIssuerReturn } from 'ryan-card-info-hooks';
 
 const cardTypeOptions = getObjectKeys(CARD_TYPE);
 

@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
   ref?: React.Ref<HTMLInputElement>;
 }
@@ -20,6 +20,7 @@ const S = {
     width: ${props => props.width};
     padding: 10px 7px;
 
+    color: ${props => (props.$isError ? '#ff3d3d' : 'black')};
     border: 1.2px solid ${props => (props.$isError ? '#ff3d3d' : LIGHT_GREY)};
     border-radius: 5px;
     font-size: 15px;

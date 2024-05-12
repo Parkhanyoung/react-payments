@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { CARD_BRAND, CARD_BRAND_ICON, CardBrand, CardBrandIcon } from '../../../assets/images/card-brand-icons';
+import { CARD_BRAND, CardBrand } from 'ryan-card-info-hooks';
+import { CARD_BRAND_ICON, CardBrandIcon } from '../../../assets/images/card-brand-icons';
 
 interface ICardBrandLogoProps {
   cardBrand: CardBrand;
 }
 
 const getCardBrandLogo = (cardBrand: CardBrand): CardBrandIcon | null => {
-  if (cardBrand === CARD_BRAND.unknown) {
+  if (cardBrand === CARD_BRAND.UNKNOWN) {
     return null;
   }
 

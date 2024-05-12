@@ -1,12 +1,20 @@
 import InputContainer from '../../../common/InputContainer';
 
 import { ErrorWrapper, ErrorText } from '../../../../styles/common';
-import { UseCardNumberReturn } from '../../../../hooks/useCardInfo/useCardInfoInputs';
-import Input from '../../../common/Input';
 import makeUniqueString from '../../../../utils/getUniqueId';
+import CardNumberInput from './CardNumberInput';
+import { UseCardNumberReturn } from 'ryan-card-info-hooks';
 
-export default function CardNumberInputContainer({ value, onChange, onBlur, errorStatus }: UseCardNumberReturn) {
+export default function CardNumberInputContainer({
+  value,
+  cardBrand,
+  onChange,
+  onBlur,
+  errorStatus,
+}: UseCardNumberReturn) {
   const inputId = makeUniqueString('card-number-input');
+
+  const formatted = value.formatted.filter(v => v).join(' ');
 
   return (
     <div>
@@ -16,15 +24,15 @@ export default function CardNumberInputContainer({ value, onChange, onBlur, erro
         labelText="카드 번호"
         labelFor={inputId}
       >
-        <Input
+        <CardNumberInput
           id={inputId}
           width="100%"
           onChange={onChange}
           isError={errorStatus.isError}
-          value={value.raw}
+          formattedValue={formatted}
+          cardBrand={cardBrand}
           onBlur={onBlur}
-          placeholder="1234"
-          maxLength={16}
+          placeholder="1234 1234 1234 1234"
           autoFocus
         />
       </InputContainer>

@@ -3,7 +3,7 @@ import InputContainer from '../../common/InputContainer';
 
 import * as S from '../../../styles/common';
 import makeUniqueString from '../../../utils/getUniqueId';
-import { UseCardholderNameReturn } from '../../../hooks/useCardInfo/useCardInfoInputs';
+import { UseCardholderNameReturn } from 'ryan-card-info-hooks';
 
 const CardholderNameInputContainer = ({ value, onChange, onBlur, errorStatus }: UseCardholderNameReturn) => {
   const inputId = makeUniqueString(`cardholder-name-input`);

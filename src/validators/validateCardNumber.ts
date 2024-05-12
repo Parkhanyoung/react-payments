@@ -1,4 +1,4 @@
-import { CARD_BRAND, CardBrand } from '../assets/images/card-brand-icons';
+import { CARD_BRAND, CardBrand } from 'ryan-card-info-hooks';
 import { IErrorStatus } from './index.d';
 
 const validateCardNumber = (cardNumber: string, cardBrand: CardBrand): IErrorStatus => {
