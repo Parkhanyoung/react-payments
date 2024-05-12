@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import CardNumbersInputContainer from './InputContainers/CardNumbersInputContainer';
+import CardNumberInputContainer from './InputContainers/CardNumberInputContainer';
 import CardExpiryDateInputContainer from './InputContainers/CardExpiryDateInputContainer';
 import CardholderNameInputContainer from './InputContainers/CardholderNameInputContainer';
 import CvcInputContainer from './InputContainers/CvcInputContainer';
@@ -66,7 +66,7 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
       {sequence >= 3 && <CardholderNameInputContainer {...cardholderName} />}
       {sequence >= 2 && <CardExpiryDateInputContainer {...expiryDate} />}
       {sequence >= 1 && <CardTypeRadioContainer {...cardType} />}
-      <CardNumbersInputContainer {...cardNumbers} />
+      <CardNumberInputContainer {...cardNumbers} />
       {isSubmitable && <S.SubmitButton type="submit">확인</S.SubmitButton>}
       <AgreementBottomSheet
         isOpen={isAgreementBottomSheetOpen}

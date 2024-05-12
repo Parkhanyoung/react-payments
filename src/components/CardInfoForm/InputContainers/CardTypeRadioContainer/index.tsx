@@ -6,11 +6,11 @@ import getObjectKeys from '../../../../utils/getObjectKeys';
 import { CARD_TYPE } from '../../../../constants/cardType';
 import CardTypeRadioModal from './CardTypeRadioModal';
 import { useState } from 'react';
-import { UseCardIssuerReturn } from '../../../../hooks/useCardInfo/useCardInfoInputs';
+import { UseCardIssuerReturn } from 'ryan-card-info-hooks';
 
 const cardTypeOptions = getObjectKeys(CARD_TYPE);
 
-export default function CardTypeSelectContainer({ value, onChange }: UseCardIssuerReturn) {
+export default function CardTypeRadioContainer({ value, onChange }: UseCardIssuerReturn) {
   const [isCardTypeModalOpen, setIsCardTypeModalOpen] = useState(false);
 
   const onCardTypeModalClose = () => {

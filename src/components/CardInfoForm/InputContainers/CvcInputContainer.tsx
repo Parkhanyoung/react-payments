@@ -3,7 +3,7 @@ import InputContainer from '../../common/InputContainer';
 
 import * as S from '../../../styles/common';
 import makeUniqueString from '../../../utils/getUniqueId';
-import { UseCVCReturn } from '../../../hooks/useCardInfo/useCardInfoInputs';
+import { UseCVCReturn } from 'ryan-card-info-hooks';
 
 export interface ICvcInputContainerProps {
   setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;

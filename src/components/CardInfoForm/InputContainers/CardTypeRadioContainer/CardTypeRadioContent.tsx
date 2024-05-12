@@ -14,11 +14,12 @@ export default function CardTypeRadioContent({ cardTypeOptions, onChange, onClos
 
     return (
       <S.BankItem key={cardType}>
-        <S.BankItemLabel htmlFor={cardType}>
+        <S.BankItemLabel htmlFor={cardType} tabIndex={0} aria-label={cardType}>
           <CardTypeOption width="32px" />
           <S.BankName>{cardType}</S.BankName>
         </S.BankItemLabel>
         <input
+          aria-hidden="true"
           name="card-type"
           id={cardType}
           type="radio"
@@ -48,7 +49,7 @@ const S = {
   `,
 
   BankItem: styled.div`
-    width: 52px;
+    width: 54px;
   `,
 
   BankItemLabel: styled.label`
@@ -56,6 +57,9 @@ const S = {
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    &:focus {
+      outline: 1px solid lightblue;
+    }
   `,
 
   BankName: styled.div`
